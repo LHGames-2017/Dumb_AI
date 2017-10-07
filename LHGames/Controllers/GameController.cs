@@ -19,6 +19,8 @@
         Point lastPosition;
 
         int indiceJoueurProche = 6969;
+        int ressourceAncienne = 0;
+        int ressourceMaison = 0;
 
 
         [HttpPost]
@@ -104,7 +106,7 @@
         {
             List<Point> chemin;
             
-            if (gameinfo.Player.CarriedResources < 0.9f * gameinfo.Player.CarryingCapacity)
+            if (gameinfo.Player.CarriedResources <= 0.9f * gameinfo.Player.CarryingCapacity)
             {
                 if (storedRessources >= 15000)
                 {

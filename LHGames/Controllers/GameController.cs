@@ -90,7 +90,7 @@
             else
             {
                 if (gameinfo.OtherPlayers.Count > 0 && gameinfo.OtherPlayers.Exists(x => Point.Distance(x.Value.Position, gameinfo.Player.Position) > 4))
-                    return AIHelper.CreateMoveAction(AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation, carte)[cptDéplacement++]);
+                    return AIHelper.CreateMoveAction(AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation, carte)[0]);
             }
             return AIHelper.CreateMoveAction(gameinfo.Player.Position);
         }

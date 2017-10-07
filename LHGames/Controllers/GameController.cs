@@ -19,11 +19,22 @@
         Point lastPosition;
         int cptDéplacement = 0;
 
+        int indiceJoueurProche = 0;
+
+
         [HttpPost]
         public string Index([FromForm]string map)
         {
             GameInfo gameInfo = JsonConvert.DeserializeObject<GameInfo>(map);
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
+
+            indiceJoueurProche = IsPlayerNear(gameInfo);
+            if(indiceJoueurProche != 6969)
+            {
+                return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
+            }
+
+
 
             if(cptTour == 0)
             {
@@ -73,6 +84,20 @@
             return action;
         }
 
+        public int IsPlayerNear(GameInfo gameinfo)
+        {
+            for (int i = 0; i < gameinfo.OtherPlayers.Count(); i++)
+            {
+                if(Point.Distance(gameinfo.OtherPlayers[i].Value.Position, gameinfo.Player.Position) == 2 ||
+                    Point.Distance(gameinfo.OtherPlayers[i].Value.Position, gameinfo.Player.Position) == 1)
+                {
+                    return i;
+                }
+                
+            }
+            return 6969;
+        }
+
         public string DeciderAction(GameInfo gameinfo, Tile[,] carte)
         {
             if(gameinfo.Player.CarriedResources <= 0.9f * gameinfo.Player.CarryingCapacity)
@@ -91,7 +116,7 @@
             }
             else
             {
-                if (gameinfo.OtherPlayers.Count > 0 && gameinfo.OtherPlayers.Exists(x => Point.Distance(x.Value.Position, gameinfo.Player.Position) > 4))
+                if (gameinfo.OtherPlayers.Count == 0 || gameinfo.OtherPlayers.Exists(x => Point.Distance(x.Value.Position, gameinfo.Player.Position) > 4))
                     return AIHelper.CreateMoveAction(AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation)[0]);
             }
             return AIHelper.CreateMoveAction(gameinfo.Player.Position);

@@ -13,6 +13,7 @@
         List<Point> houses = new List<Point>();
         List<Point> shops = new List<Point>();
         int cptTour = 0;
+        int storedRessources = 0;
         Point lastPosition;
 
         [HttpPost]
@@ -71,7 +72,10 @@
 
         public string DeciderAction(GameInfo gameinfo)
         {
-
+            if(gameinfo.Player.CarriedResources <= 0.9f * gameinfo.Player.CarryingCapacity)
+            {
+                
+            }
             return AIHelper.CreateMoveAction(gameinfo.Player.Position);
         }
     }

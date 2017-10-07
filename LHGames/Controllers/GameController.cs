@@ -17,7 +17,6 @@
         int cptTour = 0;
         int storedRessources = 0;
         Point lastPosition;
-        int cptDéplacement = 0;
 
         [HttpPost]
         public string Index([FromForm]string map)
@@ -75,10 +74,16 @@
 
         public string DeciderAction(GameInfo gameinfo, Tile[,] carte)
         {
-            if(gameinfo.Player.CarriedResources <= 0.9f * gameinfo.Player.CarryingCapacity)
+            List<Point> chemin;
+            
+            if (gameinfo.Player.CarriedResources < 0.9f * gameinfo.Player.CarryingCapacity)
             {
-                cptDéplacement = 0;
-                List<Point> chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0]-new Point(1,0), gameinfo.Player.HouseLocation);
+                if (storedRessources >= 15000)
+                {
+                    storedRessources = 0;
+                    return AIHelper.CreateUpgradeAction(UpgradeType.CarryingCapacity);
+                }
+                chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0]-new Point(1,0), gameinfo.Player.HouseLocation);
                 if (chemin.Count == 0)
                 {
                     ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
@@ -91,11 +96,18 @@
             }
             else
             {
+                chemin = AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation);
+                if(chemin.Count == 1)
+                {
+                    storedRessources += gameinfo.Player.CarriedResources;
+                }
                 if (gameinfo.OtherPlayers.Count == 0 || gameinfo.OtherPlayers.Exists(x => Point.Distance(x.Value.Position, gameinfo.Player.Position) < 4))
-                    return AIHelper.CreateMoveAction(AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation)[0]);
+                {
+                    return AIHelper.CreateMoveAction(chemin[0]);
+                }
                 else
                 {
-                    return AIHelper.CreateMoveAction(AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation)[0]);
+                    return AIHelper.CreateMoveAction(chemin[0]);
                 }
             }
             return AIHelper.CreateMoveAction(gameinfo.Player.Position);

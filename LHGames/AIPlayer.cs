@@ -7,7 +7,7 @@ namespace StarterProject.Web.Api
 {
     public class AIPlayer
     {
-        public void TrouverChemin(Point startingPoint, Point endPoint, Point houseLocation, Tile[,] carte)
+        public List<Point> TrouverChemin(Point startingPoint, Point endPoint, Point houseLocation, Tile[,] carte)
         {
             List<Node> openNodes = new List<Node>();
             List<Node> closedNodes = new List<Node>();
@@ -46,7 +46,7 @@ namespace StarterProject.Web.Api
                 neighbours.Add(new Node(new Point(currentNode.Position.X, currentNode.Position.Y + 1), startingPoint, endPoint, currentNode));
 
                 //------------------------OPENING OF NODES------------------------
-                foreach(Node n in neighbours)
+                foreach (Node n in neighbours)
                 {
                     if (carte[n.Position.X, n.Position.Y].C != 0 || n.Position.X == houseLocation.X && n.Position.Y == houseLocation.Y)
                     {
@@ -58,9 +58,19 @@ namespace StarterProject.Web.Api
                 openNodes.Remove(currentNode);
 
             }
-
+            List<Point> partiescheminALEnvers = new List<Point>();
+            List<Point> partieschemin = new List<Point>();
+            while (!(currentNode.Position.X == startingPoint.X && currentNode.Position.Y == startingPoint.Y))
+            {
+                partiescheminALEnvers.Add(currentNode.Position);
+                currentNode = currentNode.Parent;
+            }
+            for (int i = partiescheminALEnvers.Count-1; i > 0 ; i--)
+            {
+                partieschemin.Add(partiescheminALEnvers[i]);
+            }
+            return partieschemin; //ye men
         }
-
     }
 
 }

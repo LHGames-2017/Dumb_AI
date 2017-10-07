@@ -8,7 +8,7 @@ namespace StarterProject.Web.Api
     public class Node
     {
         public Point Position { get; set; }
-        Node Parent { get; set; }
+        public Node Parent { get; set; }
         Point StartPoint { get; set; }
         Point EndPoint { get; set; }
         int gCost
@@ -18,7 +18,7 @@ namespace StarterProject.Web.Api
                 return FindDistance(Position, StartPoint);
             }
         }
-        int hCost
+        public int hCost
         {
             get
             {
@@ -32,6 +32,7 @@ namespace StarterProject.Web.Api
                 return gCost + hCost;
             }
         }
+
         public Node(Point position, Point startPoint, Point endPoint, Node parent)
         {
             Position = position;

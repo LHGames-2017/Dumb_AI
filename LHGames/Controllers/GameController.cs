@@ -8,30 +8,20 @@
     [Route("/")]
     public class GameController : Controller
     {
-        const int ATQ = 1;
-        const int DEF = 2;
-        const int MAXHP = 3;
-        const int COLLECT_SPEED = 4;
-        const int CARRYING = 0;
-
+        AIPlayer AI = new AIPlayer();
         AIHelper player = new AIHelper();
         List<Point> ressources = new List<Point>();
         List<Point> houses = new List<Point>();
         List<Point> shops = new List<Point>();
         int cptTour = 0;
+        int storedRessources = 0;
         Point lastPosition;
-
-        //{ carrying, ATq, def, maxHP, collectspeed}
-        int[] upgradePlayer = new int[5] { 0, 0, 0, 0, 0 };
 
         [HttpPost]
         public string Index([FromForm]string map)
         {
             GameInfo gameInfo = JsonConvert.DeserializeObject<GameInfo>(map);
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
-            AIPlayer AI = new AIPlayer();
-            
-            
 
             if(cptTour == 0)
             {
@@ -44,6 +34,7 @@
                         if (carte[i, j].C == (byte)TileType.S) shops.Add(new Point(carte[i, j].X, carte[i, j].Y));
                     }
                 }
+                lastPosition = gameInfo.Player.Position;
             }
             Point déplacement = gameInfo.Player.Position - lastPosition;
             if(déplacement.X != 0 || déplacement.Y != 0)
@@ -54,9 +45,9 @@
                     for (int i = 0; i < carte.GetLength(0); i++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && ressources.Contains(point)) ressources.Add(point);
-                        if(carte[i, j].C == (byte)TileType.H && houses.Contains(point)) houses.Add(point);
-                        if(carte[i, j].C == (byte)TileType.S && shops.Contains(point)) shops.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x=>x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
+                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
                 }
                 else
@@ -65,24 +56,27 @@
                     for (int j = 0; i < carte.GetLength(1); i++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && ressources.Contains(point)) ressources.Add(point);
-                        if (carte[i, j].C == (byte)TileType.H && houses.Contains(point)) houses.Add(point);
-                        if (carte[i, j].C == (byte)TileType.S && shops.Contains(point)) shops.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
+                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
                 }
             }
             
 
             
-            string action = DeciderAction(gameInfo, ressources, houses, shops);
+            string action = DeciderAction(gameInfo);
             lastPosition = gameInfo.Player.Position;
+            ++cptTour;
             return action;
         }
 
-
-        public string DeciderAction(GameInfo gameinfo, List<Point> ressources, List<Point> houses, List<Point> shops)
+        public string DeciderAction(GameInfo gameinfo)
         {
-
+            if(gameinfo.Player.CarriedResources <= 0.9f * gameinfo.Player.CarryingCapacity)
+            {
+                
+            }
             return AIHelper.CreateMoveAction(gameinfo.Player.Position);
         }
     }

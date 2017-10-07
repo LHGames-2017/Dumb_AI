@@ -7,69 +7,71 @@ namespace StarterProject.Web.Api
 {
     public class AIPlayer
     {
-        public void TrouverChemin(Point startingPoint, Point endPoint)
+        public List<Point> TrouverChemin(Point startingPoint, Point endPoint, Point houseLocation, Tile[,] carte)
         {
-            List<Point> openPoints = new List<Point>();
-            List<Point> closedPoints = new List<Point>();
-            Point currentPoint = startingPoint;
-            openPoints.Add(startingPoint);
+            List<Node> openNodes = new List<Node>();
+            List<Node> closedNodes = new List<Node>();
+            Node currentNode = new Node(startingPoint, startingPoint, endPoint, null);
+            openNodes.Add(currentNode);
 
-            while (currentPoint!=endPoint)
+            while (currentNode.Position.X != endPoint.X || currentNode.Position.Y != endPoint.Y)
             {
-                //--------------CALCUL DU POINT DU MEILLEUR COST------------------
-                List<Point> minFCosts = new List<Point>();
-                int minFCost = FindFCost(openPoints[0], startingPoint, endPoint);
-                for (int p = 1; p < openPoints.Count; p++)
-                {
-                    int tempCost = FindFCost(openPoints[p], startingPoint, endPoint);
-                    if (tempCost < minFCost)
-                    {
-                        minFCost = tempCost;
-                    }
-                }
-                for (int i = 0; i < openPoints.Count; i++)
-                {
-                    if (FindFCost(openPoints[i], startingPoint, endPoint) == minFCost)
-                        minFCosts.Add(openPoints[i]);
-                }
-                if(minFCosts.Count <=2)
-                {
-                    int minHCost = FindDistance(minFCosts[0], endPoint);
-                    for (int i = 1; i < minFCosts.Count; i++)
-                    {
-                        int tempCost = FindDistance(minFCosts[i], endPoint);
-                        if (tempCost< minHCost)
-                        {
-                            minHCost = tempCost;
-                        }
-                    }
-                    for (int j= 0; j < minFCosts.Count; j++)
-                    {
-                        if (FindDistance(minFCosts[j], endPoint) == minHCost)
-                            currentPoint = minFCosts[j];
-                    }
+                //--------------CALCUL DU NODE DU MEILLEUR FCOST------------------
 
-                    openPoints.Remove(currentPoint);
-
+                List<Node> minFCosts = new List<Node>();
+                openNodes = openNodes.OrderBy(o => o.fCost).ToList();
+                int i = 0;
+                int minFCost = openNodes[0].fCost;
+                bool listCompleted = false;
+                while (!listCompleted && i < openNodes.Count)
+                {
+                    if (openNodes[i].fCost == minFCost)
+                    {
+                        minFCosts.Add(openNodes[i]);
+                    }
+                    else
+                    {
+                        listCompleted = true;
+                    }
                 }
+
+                //--------------CALCUL DU NODE DU MEILLEUR HCOST------------------
+                currentNode = minFCosts.OrderBy(o => o.hCost).ToList()[0];
+
+                //------------------DÉTECTIONS DES NEIGHBOURS---------------------
+                List<Node> neighbours = new List<Node>();
+                neighbours.Add(new Node(new Point(currentNode.Position.X - 1, currentNode.Position.Y), startingPoint, endPoint, currentNode));
+                neighbours.Add(new Node(new Point(currentNode.Position.X + 1, currentNode.Position.Y), startingPoint, endPoint, currentNode));
+                neighbours.Add(new Node(new Point(currentNode.Position.X, currentNode.Position.Y - 1), startingPoint, endPoint, currentNode));
+                neighbours.Add(new Node(new Point(currentNode.Position.X, currentNode.Position.Y + 1), startingPoint, endPoint, currentNode));
+
+                //------------------------OPENING OF NODES------------------------
+                foreach (Node n in neighbours)
+                {
+                    if (carte[n.Position.X, n.Position.Y].C != 0 || n.Position.X == houseLocation.X && n.Position.Y == houseLocation.Y)
+                    {
+                        openNodes.Add(n);
+                    }
+                }
+
+                //-------------------CLOSIING OF CURRENT NODE---------------------
+                openNodes.Remove(currentNode);
 
             }
-
-
-            
-        
+            List<Point> partiescheminALEnvers = new List<Point>();
+            List<Point> partieschemin = new List<Point>();
+            while (!(currentNode.Position.X == startingPoint.X && currentNode.Position.Y == startingPoint.Y))
+            {
+                partiescheminALEnvers.Add(currentNode.Position);
+                currentNode = currentNode.Parent;
+            }
+            for (int i = partiescheminALEnvers.Count-1; i > 0 ; i--)
+            {
+                partieschemin.Add(partiescheminALEnvers[i]);
+            }
+            return partieschemin; //ye men
         }
-        int FindDistance(Point a, Point b)
-        {
-            Point temp = a - b;
-            return (Math.Abs(temp.X) + Math.Abs(temp.Y));
-        
-        }
-        int FindFCost(Point p,Point sPoint,Point ePoint)
-        {
-            int fCost = /*g(n)*/FindDistance(p, sPoint) + /*h(n)*/FindDistance(p, ePoint);
-            return fCost;
-        }
-        
     }
+
 }
+

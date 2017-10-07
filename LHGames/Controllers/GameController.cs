@@ -91,8 +91,12 @@
             }
             else
             {
-                if (gameinfo.OtherPlayers.Count == 0 || gameinfo.OtherPlayers.Exists(x => Point.Distance(x.Value.Position, gameinfo.Player.Position) > 4))
+                if (gameinfo.OtherPlayers.Count == 0 || gameinfo.OtherPlayers.Exists(x => Point.Distance(x.Value.Position, gameinfo.Player.Position) < 4))
                     return AIHelper.CreateMoveAction(AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation)[0]);
+                else
+                {
+                    return AIHelper.CreateMoveAction(AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation)[0]);
+                }
             }
             return AIHelper.CreateMoveAction(gameinfo.Player.Position);
         }

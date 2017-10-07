@@ -9,6 +9,7 @@ namespace StarterProject.Web.Api
     {
         public void TrouverChemin(Point startingPoint, Point endPoint)
         {
+            Point a = new Point(0, 0);
 
         }
         

@@ -38,11 +38,11 @@
 
             if (cptTour % 10 == 0)
             {
+                ressources = new List<Point>();
                 for (int i = 0; i < carte.GetLength(0); i++)
                 {
                     for (int j = 0; j < carte.GetLength(1); j++)
                     {
-                        ressources = new List<Point>();
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
                         if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
                         if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);

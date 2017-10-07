@@ -15,14 +15,14 @@ namespace StarterProject.Web.Api
         {
             get
             {
-                return 0;
+                return FindDistance(Position, StartPoint);
             }
         }
         int hCost
         {
             get
             {
-                return 0;
+                return FindDistance(Position, EndPoint);
             }
         }
         public int fCost
@@ -38,6 +38,13 @@ namespace StarterProject.Web.Api
             StartPoint = startPoint;
             EndPoint = endPoint;
             Parent = parent;
+        }
+
+        int FindDistance(Point a, Point b)
+        {
+            Point temp = a - b;
+            return (Math.Abs(temp.X) + Math.Abs(temp.Y));
+
         }
     }
 }

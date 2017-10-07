@@ -18,11 +18,22 @@
         int storedRessources = 0;
         Point lastPosition;
 
+        int indiceJoueurProche = 0;
+
+
         [HttpPost]
         public string Index([FromForm]string map)
         {
             GameInfo gameInfo = JsonConvert.DeserializeObject<GameInfo>(map);
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
+
+            indiceJoueurProche = IsPlayerNear(gameInfo);
+            if(indiceJoueurProche != 6969)
+            {
+                return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
+            }
+
+
 
             if(cptTour == 0)
             {
@@ -70,6 +81,20 @@
             lastPosition = gameInfo.Player.Position;
             ++cptTour;
             return action;
+        }
+
+        public int IsPlayerNear(GameInfo gameinfo)
+        {
+            for (int i = 0; i < gameinfo.OtherPlayers.Count(); i++)
+            {
+                if(
+                    Point.Distance(gameinfo.OtherPlayers[i].Value.Position, gameinfo.Player.Position) == 1)
+                {
+                    return i;
+                }
+                
+            }
+            return 6969;
         }
 
         public string DeciderAction(GameInfo gameinfo, Tile[,] carte)

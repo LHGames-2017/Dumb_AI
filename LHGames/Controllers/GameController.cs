@@ -76,10 +76,10 @@
         {
             if(gameinfo.Player.CarriedResources <= 0.9f * gameinfo.Player.CarryingCapacity)
             {
-                List<Point> chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0], gameinfo.Player.HouseLocation, carte);
-                if (chemin.Count == 1)
+                List<Point> chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0]-new Point(1,0), gameinfo.Player.HouseLocation, carte);
+                if (chemin.Count == 0)
                 {
-                    return AIHelper.CreateCollectAction(chemin[0]);
+                    return AIHelper.CreateCollectAction(ressources[0]);
                 }
                 else
                 {

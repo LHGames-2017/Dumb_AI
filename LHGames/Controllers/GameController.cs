@@ -8,6 +8,7 @@
     [Route("/")]
     public class GameController : Controller
     {
+        AIPlayer AI = new AIPlayer();
         AIHelper player = new AIHelper();
         List<Point> ressources = new List<Point>();
         List<Point> houses = new List<Point>();
@@ -21,7 +22,6 @@
         {
             GameInfo gameInfo = JsonConvert.DeserializeObject<GameInfo>(map);
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
-            AIPlayer AI = new AIPlayer();
 
             if(cptTour == 0)
             {
@@ -34,6 +34,7 @@
                         if (carte[i, j].C == (byte)TileType.S) shops.Add(new Point(carte[i, j].X, carte[i, j].Y));
                     }
                 }
+                lastPosition = gameInfo.Player.Position;
             }
             Point déplacement = gameInfo.Player.Position - lastPosition;
             if(déplacement.X != 0 || déplacement.Y != 0)

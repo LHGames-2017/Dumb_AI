@@ -36,15 +36,17 @@
 
             
 
-            if (cptTour == 0)
+            if (cptTour % 10 == 0)
             {
                 for (int i = 0; i < carte.GetLength(0); i++)
                 {
                     for (int j = 0; j < carte.GetLength(1); j++)
                     {
-                        if (carte[i, j].C == (byte)TileType.R) ressources.Add(new Point(carte[i, j].X, carte[i, j].Y));
-                        if (carte[i, j].C == (byte)TileType.H) houses.Add(new Point(carte[i, j].X, carte[i, j].Y));
-                        if (carte[i, j].C == (byte)TileType.S) shops.Add(new Point(carte[i, j].X, carte[i, j].Y));
+                        ressources = new List<Point>();
+                        Point point = new Point(carte[i, j].X, carte[i, j].Y);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
+                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
                 }
                 lastPosition = gameInfo.Player.Position;

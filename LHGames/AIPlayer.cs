@@ -81,7 +81,7 @@ namespace StarterProject.Web.Api
         {
             try
             {
-                if(closed.FindIndex(n=> n.Position.X == parentNode.Position.X +deltaX && n.Position.Y == parentNode.Position.Y + deltaY) == -1 &&( carte[posCarte.X + deltaX, posCarte.Y+deltaY].C == 0 || houseLocation.X == parentNode.Position.X + deltaX && houseLocation.Y == parentNode.Position.Y + deltaY))
+                if (closed.FindIndex(n => n.Position.X == parentNode.Position.X + deltaX && n.Position.Y == parentNode.Position.Y + deltaY) == -1 && (carte[posCarte.X + deltaX, posCarte.Y + deltaY].C == 0 || houseLocation.X == parentNode.Position.X + deltaX && houseLocation.Y == parentNode.Position.Y + deltaY))
                 {
                     neighbours.Add(new Node(new Point(parentNode.Position.X + deltaX, parentNode.Position.Y + deltaY), startp, endP, parentNode));
                 }

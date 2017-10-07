@@ -17,6 +17,7 @@
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
             AIPlayer AI = new AIPlayer();
 
+
             // INSERT AI CODE HERE.
 
             string action = AIHelper.CreateMoveAction(gameInfo.Player.Position);

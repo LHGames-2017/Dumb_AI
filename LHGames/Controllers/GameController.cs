@@ -19,7 +19,7 @@
         Point lastPosition;
         int cptDéplacement = 0;
 
-        int indiceJoueurProche = 0;
+        int indiceJoueurProche = 6969;
 
 
         [HttpPost]
@@ -31,6 +31,7 @@
             indiceJoueurProche = IsPlayerNear(gameInfo);
             if(indiceJoueurProche != 6969)
             {
+                indiceJoueurProche = 6969;
                 return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
             }
 

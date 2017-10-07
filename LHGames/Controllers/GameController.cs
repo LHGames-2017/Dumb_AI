@@ -48,9 +48,9 @@
                         if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
                         if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
-                //}
+                }
                 lastPosition = gameInfo.Player.Position;
-            }
+            //}
             Point déplacement = gameInfo.Player.Position - lastPosition;
             if (déplacement.X != 0 || déplacement.Y != 0)
             {

@@ -22,7 +22,10 @@
             GameInfo gameInfo = JsonConvert.DeserializeObject<GameInfo>(map);
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
 
-            if(cptTour == 0)
+//List<Point> test = AI.TrouverChemin(new Point(25, 27), new Point(26, 28), new Point(25, 27)/*, carte*/);
+
+
+            if (cptTour == 0)
             {
                 for (int i = 0; i < carte.GetLength(0); i++)
                 {
@@ -36,15 +39,15 @@
                 lastPosition = gameInfo.Player.Position;
             }
             Point déplacement = gameInfo.Player.Position - lastPosition;
-            if(déplacement.X != 0 || déplacement.Y != 0)
+            if (déplacement.X != 0 || déplacement.Y != 0)
             {
-                if(déplacement.X == 0)
+                if (déplacement.X == 0)
                 {
                     int j = déplacement.Y == 1 ? 0 : carte.GetLength(1) - 1;
                     for (int i = 0; i < carte.GetLength(0); i++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x=>x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
                         if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
                         if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
@@ -61,9 +64,9 @@
                     }
                 }
             }
-            
 
-            
+
+
             string action = DeciderAction(gameInfo);
             lastPosition = gameInfo.Player.Position;
             ++cptTour;

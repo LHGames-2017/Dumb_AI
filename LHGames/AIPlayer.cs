@@ -7,7 +7,7 @@ namespace StarterProject.Web.Api
 {
     public class AIPlayer
     {
-        public List<Point> TrouverChemin(Point startingPoint, Point endPoint, Point houseLocation, Tile[,] carte)
+        public List<Point> TrouverChemin(Point startingPoint, Point endPoint, Point houseLocation/*, Tile[,] carte*/)
         {
             List<Node> openNodes = new List<Node>();
             List<Node> closedNodes = new List<Node>();
@@ -33,6 +33,7 @@ namespace StarterProject.Web.Api
                     {
                         listCompleted = true;
                     }
+                    ++i;
                 }
 
                 //--------------CALCUL DU NODE DU MEILLEUR HCOST------------------
@@ -48,10 +49,10 @@ namespace StarterProject.Web.Api
                 //------------------------OPENING OF NODES------------------------
                 foreach (Node n in neighbours)
                 {
-                    if (carte[n.Position.X, n.Position.Y].C != 0 || n.Position.X == houseLocation.X && n.Position.Y == houseLocation.Y)
-                    {
-                        openNodes.Add(n);
-                    }
+                    //if (carte[n.Position.X, n.Position.Y].C != 0 || n.Position.X == houseLocation.X && n.Position.Y == houseLocation.Y)
+                    //{
+                    openNodes.Add(n);
+                    //}
                 }
 
                 //-------------------CLOSIING OF CURRENT NODE---------------------
@@ -65,7 +66,7 @@ namespace StarterProject.Web.Api
                 partiescheminALEnvers.Add(currentNode.Position);
                 currentNode = currentNode.Parent;
             }
-            for (int i = partiescheminALEnvers.Count-1; i > 0 ; i--)
+            for (int i = partiescheminALEnvers.Count - 1; i >= 0; i--)
             {
                 partieschemin.Add(partiescheminALEnvers[i]);
             }

@@ -14,7 +14,7 @@ namespace StarterProject.Web.Api
             Node currentNode = new Node(startingPoint, startingPoint, endPoint, null);
             openNodes.Add(currentNode);
 
-            while (currentNode.Position.X != endPoint.X || currentNode.Position.Y != endPoint.Y)
+            while (openNodes.Count>0 && currentNode.Position.X != endPoint.X || currentNode.Position.Y != endPoint.Y)
             {
                 //--------------CALCUL DU NODE DU MEILLEUR FCOST------------------
 
@@ -63,6 +63,7 @@ namespace StarterProject.Web.Api
                 closedNodes.Add(currentNode);
 
             }
+
             List<Point> partiescheminALEnvers = new List<Point>();
             List<Point> partieschemin = new List<Point>();
             while (!(currentNode.Position.X == startingPoint.X && currentNode.Position.Y == startingPoint.Y))

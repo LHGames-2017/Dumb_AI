@@ -34,23 +34,26 @@
                 return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
             }
 
-            
 
-            if (cptTour % 10 == 0)
-            {
+            ressources = new List<Point>();
+            //if (cptTour % 10 == 0)
+            //{
                 for (int i = 0; i < carte.GetLength(0); i++)
                 {
                     for (int j = 0; j < carte.GetLength(1); j++)
                     {
-                        ressources = new List<Point>();
+
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
-                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
-                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y))
+                        { ressources.Add(point); }
+                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) { houses.Add(point); }
+                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) { shops.Add(point); }
                     }
                 }
+
+
                 lastPosition = gameInfo.Player.Position;
-            }
+            //}
             Point déplacement = gameInfo.Player.Position - lastPosition;
             if(déplacement.X != 0 || déplacement.Y != 0)
             {
@@ -60,7 +63,7 @@
                     for (int i = 0; i < carte.GetLength(0); i++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x=>x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) { ressources.Add(point); }
                         if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
                         if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
@@ -86,6 +89,8 @@
             return action;
         }
 
+      
+
         public int IsPlayerNear(GameInfo gameinfo)
         {
             for (int i = 0; i < gameinfo.OtherPlayers.Count(); i++)
@@ -99,6 +104,7 @@
             }
             return 6969;
         }
+
 
         public string DeciderAction(GameInfo gameinfo, Tile[,] carte)
         {

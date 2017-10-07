@@ -18,7 +18,7 @@ namespace StarterProject.Web.Api
                 return FindDistance(Position, StartPoint);
             }
         }
-        int hCost
+        public int hCost
         {
             get
             {

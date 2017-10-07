@@ -88,7 +88,7 @@
         {
             for (int i = 0; i < gameinfo.OtherPlayers.Count(); i++)
             {
-                if(Point.Distance(gameinfo.OtherPlayers[i].Value.Position, gameinfo.Player.Position) == 2 ||
+                if(
                     Point.Distance(gameinfo.OtherPlayers[i].Value.Position, gameinfo.Player.Position) == 1)
                 {
                     return i;

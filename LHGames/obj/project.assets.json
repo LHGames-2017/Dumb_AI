@@ -12542,11 +12542,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI2\\LHGames\\LHGames.csproj",
+      "projectUniqueName": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI\\LHGames\\LHGames.csproj",
       "projectName": "LHGames",
-      "projectPath": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI2\\LHGames\\LHGames.csproj",
+      "projectPath": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI\\LHGames\\LHGames.csproj",
       "packagesPath": "C:\\Users\\antoi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI2\\LHGames\\obj\\",
+      "outputPath": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI\\LHGames\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

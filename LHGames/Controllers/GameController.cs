@@ -8,6 +8,12 @@
     [Route("/")]
     public class GameController : Controller
     {
+        const int ATQ = 1;
+        const int DEF = 2;
+        const int MAXHP = 3;
+        const int COLLECT_SPEED = 4;
+        const int CARRYING = 0;
+
         AIHelper player = new AIHelper();
         List<Point> ressources = new List<Point>();
         List<Point> houses = new List<Point>();
@@ -15,12 +21,17 @@
         int cptTour = 0;
         Point lastPosition;
 
+        //{ carrying, ATq, def, maxHP, collectspeed}
+        int[] upgradePlayer = new int[5] { 0, 0, 0, 0, 0 };
+
         [HttpPost]
         public string Index([FromForm]string map)
         {
             GameInfo gameInfo = JsonConvert.DeserializeObject<GameInfo>(map);
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
             AIPlayer AI = new AIPlayer();
+            
+            
 
             if(cptTour == 0)
             {
@@ -67,6 +78,7 @@
             lastPosition = gameInfo.Player.Position;
             return action;
         }
+
 
         public string DeciderAction(GameInfo gameinfo, List<Point> ressources, List<Point> houses, List<Point> shops)
         {

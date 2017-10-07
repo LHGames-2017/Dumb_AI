@@ -109,7 +109,7 @@
                     storedRessources = 0;
                     return AIHelper.CreateUpgradeAction(UpgradeType.CarryingCapacity);
                 }
-                chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0]-new Point(1,0), gameinfo.Player.HouseLocation);
+                chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0]-new Point(1,0), gameinfo.Player.HouseLocation,carte);
                 if (chemin.Count == 0)
                 {
                     ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
@@ -122,7 +122,7 @@
             }
             else
             {
-                chemin = AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation);
+                chemin = AI.TrouverChemin(gameinfo.Player.Position, gameinfo.Player.HouseLocation, gameinfo.Player.HouseLocation,carte);
                 if(chemin.Count == 1)
                 {
                     storedRessources += gameinfo.Player.CarriedResources;

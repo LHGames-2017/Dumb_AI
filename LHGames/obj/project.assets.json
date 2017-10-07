@@ -12533,7 +12533,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\antoi\\.nuget\\packages\\": {},
+    "C:\\Users\\farme\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -12542,17 +12542,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI2\\LHGames\\LHGames.csproj",
+      "projectUniqueName": "C:\\Users\\farme\\Source\\Repos\\Dumb_AI2\\LHGames\\LHGames.csproj",
       "projectName": "LHGames",
-      "projectPath": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI2\\LHGames\\LHGames.csproj",
-      "packagesPath": "C:\\Users\\antoi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\antoi\\Source\\Repos\\Dumb_AI2\\LHGames\\obj\\",
+      "projectPath": "C:\\Users\\farme\\Source\\Repos\\Dumb_AI2\\LHGames\\LHGames.csproj",
+      "packagesPath": "C:\\Users\\farme\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\farme\\Source\\Repos\\Dumb_AI2\\LHGames\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\antoi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\farme\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

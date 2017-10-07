@@ -19,6 +19,8 @@
         Point lastPosition;
 
         int indiceJoueurProche = 6969;
+        int ressourceAncienne = 0;
+        int ressourceMaison = 0;
 
 
         [HttpPost]
@@ -34,7 +36,7 @@
                 return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
             }
 
-
+            
 
             ressources = new List<Point>();
             //if (cptTour % 10 == 0)
@@ -77,9 +79,9 @@
                     }
                 }
             }
+            
 
-
-
+            
             string action = DeciderAction(gameInfo, carte);
             lastPosition = gameInfo.Player.Position;
             ++cptTour;
@@ -103,8 +105,8 @@
         public string DeciderAction(GameInfo gameinfo, Tile[,] carte)
         {
             List<Point> chemin;
-
-            if (gameinfo.Player.CarriedResources < 0.9f * gameinfo.Player.CarryingCapacity)
+            
+            if (gameinfo.Player.CarriedResources <= 0.9f * gameinfo.Player.CarryingCapacity)
             {
                 if (storedRessources >= 15000)
                 {

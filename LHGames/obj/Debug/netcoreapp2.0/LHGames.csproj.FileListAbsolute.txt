@@ -20,3 +20,14 @@ C:\Users\antoi\Source\Repos\Dumb_AI\LHGames\obj\Debug\netcoreapp2.0\LHGames.Asse
 C:\Users\antoi\Source\Repos\Dumb_AI\LHGames\obj\Debug\netcoreapp2.0\LHGames.AssemblyInfo.cs
 C:\Users\antoi\Source\Repos\Dumb_AI\LHGames\obj\Debug\netcoreapp2.0\LHGames.dll
 C:\Users\antoi\Source\Repos\Dumb_AI\LHGames\obj\Debug\netcoreapp2.0\LHGames.pdb
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\bin\Debug\netcoreapp2.0\LHGames.deps.json
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\bin\Debug\netcoreapp2.0\LHGames.runtimeconfig.json
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\bin\Debug\netcoreapp2.0\LHGames.runtimeconfig.dev.json
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\bin\Debug\netcoreapp2.0\LHGames.dll
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\bin\Debug\netcoreapp2.0\LHGames.pdb
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\obj\Debug\netcoreapp2.0\LHGames.csprojResolveAssemblyReference.cache
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\obj\Debug\netcoreapp2.0\LHGames.csproj.CoreCompileInputs.cache
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\obj\Debug\netcoreapp2.0\LHGames.AssemblyInfoInputs.cache
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\obj\Debug\netcoreapp2.0\LHGames.AssemblyInfo.cs
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\obj\Debug\netcoreapp2.0\LHGames.dll
+C:\Users\ffort\Source\Repos\Dumb_AI2\LHGames\obj\Debug\netcoreapp2.0\LHGames.pdb

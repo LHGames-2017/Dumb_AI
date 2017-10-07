@@ -34,9 +34,9 @@
                 return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
             }
 
-            
 
-            if (cptTour % 10 == 0)
+
+            if (cptTour == 0)
             {
                 ressources = new List<Point>();
                 for (int i = 0; i < carte.GetLength(0); i++)

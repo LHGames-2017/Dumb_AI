@@ -49,7 +49,7 @@ namespace StarterProject.Web.Api
                             currentPoint = minFCosts[j];
                     }
 
-                    openPoints.Remove(currentPoint)
+                    openPoints.Remove(currentPoint);
 
                 }
 

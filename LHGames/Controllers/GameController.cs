@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
+    using System.Linq;
 
     [Route("/")]
     public class GameController : Controller
@@ -80,6 +81,7 @@
                 List<Point> chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0]-new Point(1,0), gameinfo.Player.HouseLocation);
                 if (chemin.Count == 0)
                 {
+                    ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
                     return AIHelper.CreateCollectAction(ressources[0]);
                 }
                 else

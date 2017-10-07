@@ -43,9 +43,9 @@
                     for (int i = 0; i < carte.GetLength(0); i++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && ressources.Contains(point)) ressources.Add(point);
-                        if(carte[i, j].C == (byte)TileType.H && houses.Contains(point)) houses.Add(point);
-                        if(carte[i, j].C == (byte)TileType.S && shops.Contains(point)) shops.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x=>x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
+                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
                 }
                 else
@@ -54,21 +54,22 @@
                     for (int j = 0; i < carte.GetLength(1); i++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && ressources.Contains(point)) ressources.Add(point);
-                        if (carte[i, j].C == (byte)TileType.H && houses.Contains(point)) houses.Add(point);
-                        if (carte[i, j].C == (byte)TileType.S && shops.Contains(point)) shops.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
+                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
                 }
             }
             
 
             
-            string action = DeciderAction(gameInfo, ressources, houses, shops);
+            string action = DeciderAction(gameInfo);
             lastPosition = gameInfo.Player.Position;
+            ++cptTour;
             return action;
         }
 
-        public string DeciderAction(GameInfo gameinfo, List<Point> ressources, List<Point> houses, List<Point> shops)
+        public string DeciderAction(GameInfo gameinfo)
         {
 
             return AIHelper.CreateMoveAction(gameinfo.Player.Position);

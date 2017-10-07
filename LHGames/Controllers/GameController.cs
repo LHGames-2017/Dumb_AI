@@ -24,8 +24,7 @@
             GameInfo gameInfo = JsonConvert.DeserializeObject<GameInfo>(map);
             var carte = AIHelper.DeserializeMap(gameInfo.CustomSerializedMap);
 
-//List<Point> test = AI.TrouverChemin(new Point(25, 27), new Point(26, 28), new Point(25, 27)/*, carte*/);
-
+//List<Point> test = AI.TrouverChemin(new Point(1, 1), new Point(2, 2), new Point(25, 27));
 
             if (cptTour == 0)
             {
@@ -69,7 +68,7 @@
 
 
             
-            string action = DeciderAction(gameInfo);
+            string action = DeciderAction(gameInfo, carte);
             lastPosition = gameInfo.Player.Position;
             ++cptTour;
             return action;

@@ -34,7 +34,7 @@
                 return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
             }
 
-
+            
 
             if (cptTour % 10 == 0)
             {

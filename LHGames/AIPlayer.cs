@@ -11,64 +11,64 @@ namespace StarterProject.Web.Api
         {
             List<Point> partieschemin = new List<Point>();
 
-            int mincarteX = carte[0, 0].X;
-            int maxcarteX = carte[0, 0].X;
-            int mincarteY = carte[0, 0].Y;
-            int maxcarteY = carte[0, 0].Y;
-            for (int i = 0; i < carte.GetLength(0); ++i)
-            {
-                for (int j = 0; j < carte.GetLength(1); ++j)
-                {
-                    if (carte[i, j].X < mincarteX)
-                    {
-                        mincarteX = carte[i, j].X;
-                    }
-                    else if (carte[i, j].X > maxcarteX)
-                    {
-                        maxcarteX = carte[i, j].X;
-                    }
-                    if (carte[i, j].Y < mincarteY)
-                    {
-                        mincarteX = carte[i, j].Y;
-                    }
-                    else if (carte[i, j].Y > maxcarteY)
-                    {
-                        maxcarteX = carte[i, j].Y;
-                    }
-                }
-            }
-            if (mincarteX > endPoint.X)
-            {
-                for(int i = 0; i< mincarteX - endPoint.X;++i)
-                {
-                    partieschemin.Add(new Point(endPoint.X + i, endPoint.Y));
-                }
-            }
-            else if (maxcarteX < endPoint.X)
-            {
-                for (int i = 0; i < mincarteX - endPoint.X; ++i)
-                {
-                    partieschemin.Add(new Point(endPoint.X - i, endPoint.Y));
-                }
-            }
-            else if (mincarteY > endPoint.Y)
-            {
-                partieschemin = new List<Point>();
-                for (int i = 0; i < mincarteY - endPoint.Y; ++i)
-                {
-                    partieschemin.Add(new Point(endPoint.X, endPoint.Y + i));
-                }
-            }
-            else if (maxcarteY < endPoint.Y)
-            {
-                partieschemin = new List<Point>();
-                for (int i = 0; i < mincarteY - endPoint.Y; ++i)
-                {
-                    partieschemin.Add(new Point(endPoint.X, endPoint.Y - i));
-                }
-            }
-            else
-            {
+            //int mincarteX = carte[0, 0].X;
+            //int maxcarteX = carte[0, 0].X;
+            //int mincarteY = carte[0, 0].Y;
+            //int maxcarteY = carte[0, 0].Y;
+            //for (int i = 0; i < carte.GetLength(0); ++i)
+            //{
+            //    for (int j = 0; j < carte.GetLength(1); ++j)
+            //    {
+            //        if (carte[i, j].X < mincarteX)
+            //        {
+            //            mincarteX = carte[i, j].X;
+            //        }
+            //        else if (carte[i, j].X > maxcarteX)
+            //        {
+            //            maxcarteX = carte[i, j].X;
+            //        }
+            //        if (carte[i, j].Y < mincarteY)
+            //        {
+            //            mincarteX = carte[i, j].Y;
+            //        }
+            //        else if (carte[i, j].Y > maxcarteY)
+            //        {
+            //            maxcarteX = carte[i, j].Y;
+            //        }
+            //    }
+            //}
+            //if (mincarteX > endPoint.X)
+            //{
+            //    for(int i = 0; i< mincarteX - endPoint.X;++i)
+            //    {
+            //        partieschemin.Add(new Point(endPoint.X + i, endPoint.Y));
+            //    }
+            //}
+            //else if (maxcarteX < endPoint.X)
+            //{
+            //    for (int i = 0; i < mincarteX - endPoint.X; ++i)
+            //    {
+            //        partieschemin.Add(new Point(endPoint.X - i, endPoint.Y));
+            //    }
+            //}
+            //else if (mincarteY > endPoint.Y)
+            //{
+            //    partieschemin = new List<Point>();
+            //    for (int i = 0; i < mincarteY - endPoint.Y; ++i)
+            //    {
+            //        partieschemin.Add(new Point(endPoint.X, endPoint.Y + i));
+            //    }
+            //}
+            //else if (maxcarteY < endPoint.Y)
+            //{
+            //    partieschemin = new List<Point>();
+            //    for (int i = 0; i < mincarteY - endPoint.Y; ++i)
+            //    {
+            //        partieschemin.Add(new Point(endPoint.X, endPoint.Y - i));
+            //    }
+            //}
+            //else
+            //{
                 List<Node> openNodes = new List<Node>();
                 List<Node> closedNodes = new List<Node>();
                 Node currentNode = new Node(startingPoint, startingPoint, endPoint, null);
@@ -134,7 +134,7 @@ namespace StarterProject.Web.Api
                 {
                     partieschemin.Add(partiescheminALEnvers[i]);
                 }
-            }
+            //}
             
             return partieschemin; //ye men
         }

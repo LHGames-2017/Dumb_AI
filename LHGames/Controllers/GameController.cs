@@ -36,7 +36,7 @@
                 return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
             }
 
-
+            
 
             ressources = new List<Point>();
             //if (cptTour % 10 == 0)
@@ -46,44 +46,44 @@
                     for (int j = 0; j < carte.GetLength(1); j++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R /*&& !ressources.Exists(x => x.X == point.X && x.Y == point.Y)*/) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R) ressources.Add(point);
                         if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
                         if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
                 }
-            lastPosition = gameInfo.Player.Position;
+                //lastPosition = gameInfo.Player.Position;
             //}
-            Point déplacement = gameInfo.Player.Position - lastPosition;
-            if (déplacement.X != 0 || déplacement.Y != 0)
-            {
-                if (déplacement.X == 0)
-                {
-                    int j = déplacement.Y == 1 ? 0 : carte.GetLength(1) - 1;
-                    for (int i = 0; i < carte.GetLength(0); i++)
-                    {
-                        Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
-                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
-                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
-                    }
-                }
-                else
-                {
-                    int i = déplacement.X == -1 ? 0 : carte.GetLength(1) - 1;
-                    for (int j = 0; i < carte.GetLength(1); i++)
-                    {
-                        Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
-                        if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
-                        if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
-                    }
-                }
-            }
+            //Point déplacement = gameInfo.Player.Position - lastPosition;
+            //if (déplacement.X != 0 || déplacement.Y != 0)
+            //{
+            //    if (déplacement.X == 0)
+            //    {
+            //        int j = déplacement.Y == 1 ? 0 : carte.GetLength(1) - 1;
+            //        for (int i = 0; i < carte.GetLength(0); i++)
+            //        {
+            //            Point point = new Point(carte[i, j].X, carte[i, j].Y);
+            //            if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+            //            if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
+            //            if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        int i = déplacement.X == -1 ? 0 : carte.GetLength(1) - 1;
+            //        for (int j = 0; i < carte.GetLength(1); i++)
+            //        {
+            //            Point point = new Point(carte[i, j].X, carte[i, j].Y);
+            //            if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+            //            if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
+            //            if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
+            //        }
+            //    }
+            //}
+            
 
-
-
+            
             string action = DeciderAction(gameInfo, carte);
-            //lastPosition = gameInfo.Player.Position;
+            lastPosition = gameInfo.Player.Position;
             ++cptTour;
             return action;
         }
@@ -113,10 +113,11 @@
                     storedRessources = 0;
                     return AIHelper.CreateUpgradeAction(UpgradeType.CarryingCapacity);
                 }
-                chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0] - new Point(1, 0), gameinfo.Player.HouseLocation, carte);
+                ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
+                chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0] - new Point(0 , 1), gameinfo.Player.HouseLocation, carte);
                 if (chemin.Count == 0)
                 {
-                    ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
+                    //ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
                     return AIHelper.CreateCollectAction(ressources[0]);
                 }
                 else

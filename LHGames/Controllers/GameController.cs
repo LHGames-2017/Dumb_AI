@@ -36,7 +36,7 @@
                 return AIHelper.CreateAttackAction(gameInfo.OtherPlayers[indiceJoueurProche].Value.Position);
             }
 
-            
+
 
             ressources = new List<Point>();
             //if (cptTour % 10 == 0)
@@ -46,12 +46,12 @@
                     for (int j = 0; j < carte.GetLength(1); j++)
                     {
                         Point point = new Point(carte[i, j].X, carte[i, j].Y);
-                        if (carte[i, j].C == (byte)TileType.R && !ressources.Exists(x => x.X == point.X && x.Y == point.Y)) ressources.Add(point);
+                        if (carte[i, j].C == (byte)TileType.R /*&& !ressources.Exists(x => x.X == point.X && x.Y == point.Y)*/) ressources.Add(point);
                         if (carte[i, j].C == (byte)TileType.H && !houses.Exists(x => x.X == point.X && x.Y == point.Y)) houses.Add(point);
                         if (carte[i, j].C == (byte)TileType.S && !shops.Exists(x => x.X == point.X && x.Y == point.Y)) shops.Add(point);
                     }
                 }
-                lastPosition = gameInfo.Player.Position;
+            lastPosition = gameInfo.Player.Position;
             //}
             Point déplacement = gameInfo.Player.Position - lastPosition;
             if (déplacement.X != 0 || déplacement.Y != 0)
@@ -79,11 +79,11 @@
                     }
                 }
             }
-            
 
-            
+
+
             string action = DeciderAction(gameInfo, carte);
-            lastPosition = gameInfo.Player.Position;
+            //lastPosition = gameInfo.Player.Position;
             ++cptTour;
             return action;
         }

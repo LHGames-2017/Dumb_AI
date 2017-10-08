@@ -113,10 +113,11 @@
                     storedRessources = 0;
                     return AIHelper.CreateUpgradeAction(UpgradeType.CarryingCapacity);
                 }
+                ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
                 chemin = AI.TrouverChemin(gameinfo.Player.Position, ressources[0] - new Point(1, 0), gameinfo.Player.HouseLocation, carte);
                 if (chemin.Count == 0)
                 {
-                    ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
+                    //ressources = ressources.OrderBy(x => Point.Distance(x, gameinfo.Player.Position)).ToList();
                     return AIHelper.CreateCollectAction(ressources[0]);
                 }
                 else

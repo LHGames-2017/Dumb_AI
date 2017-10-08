@@ -106,7 +106,7 @@
         {
             List<Point> chemin;
             
-            if (gameinfo.Player.CarriedResources = 0.8f * gameinfo.Player.CarryingCapacity)
+            if (gameinfo.Player.CarriedResources == 0.8f * gameinfo.Player.CarryingCapacity)
             {
                 if (storedRessources >= 15000)
                 {
